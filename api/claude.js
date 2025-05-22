@@ -1,12 +1,10 @@
 export default async function handler(req, res) {
-    res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
-        res.status(200).end();
-        return;
+        return res.status(200).end();
     }
 
     if (req.method !== 'POST') {
@@ -17,7 +15,7 @@ export default async function handler(req, res) {
         const { apiKey, model, message } = req.body;
         
         if (!apiKey || !model || !message) {
-            return res.status(400).json({ error: 'Chybí povinné parametry' });
+            return res.status(400).json({ error: 'Chybí parametry' });
         }
 
         const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -30,10 +28,7 @@ export default async function handler(req, res) {
             body: JSON.stringify({
                 model: model,
                 max_tokens: 1024,
-                messages: [{
-                    role: 'user',
-                    content: message
-                }]
+                messages: [{ role: 'user', content: message }]
             })
         });
 
@@ -45,10 +40,9 @@ export default async function handler(req, res) {
         }
 
         const data = await response.json();
-        res.json({ content: data.content[0].text });
+        return res.status(200).json({ content: data.content[0].text });
         
     } catch (error) {
-        console.error('Server error:', error);
-        res.status(500).json({ error: 'Serverová chyba: ' + error.message });
+        return res.status(500).json({ error: 'Server error: ' + error.message });
     }
 }
