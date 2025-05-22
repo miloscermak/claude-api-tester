@@ -1,0 +1,14 @@
+{
+  "name": "claude-api-tester",
+  "version": "1.0.0",
+  "description": "Claude API testing tool",
+  "main": "api/claude.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
