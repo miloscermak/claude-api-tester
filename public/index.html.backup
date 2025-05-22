@@ -170,6 +170,14 @@
                             <input type="checkbox" id="claude-3-7-sonnet" value="claude-3-7-sonnet-20250219">
                             <label for="claude-3-7-sonnet">Claude Sonnet 3.7</label>
                         </div>
+                    </div>                        <div class="model-checkbox">
+                            <input type="checkbox" id="claude-sonnet-4" value="claude-sonnet-4-20250514">
+                            <label for="claude-sonnet-4">Claude Sonnet 4</label>
+                        </div>
+                        <div class="model-checkbox">
+                            <input type="checkbox" id="claude-3-7-sonnet" value="claude-3-7-sonnet-20250219">
+                            <label for="claude-3-7-sonnet">Claude Sonnet 3.7</label>
+                        </div>
                     </div>
                 </div>
                 <div class="control-buttons">
